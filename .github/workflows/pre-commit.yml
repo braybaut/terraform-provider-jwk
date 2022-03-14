@@ -1,0 +1,20 @@
+---
+name: Pre-Commit
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  pre-commit:
+    if: ${{ false }}  # disable by default
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-python@v2
+      - uses: pre-commit/action@v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
